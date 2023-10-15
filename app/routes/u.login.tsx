@@ -1,18 +1,25 @@
 import { Text } from '~/components/ui/text';
 import { Button } from '~/components/ui/button';
-import { signIn } from '~/api/user';
+import { signInWithGoogle } from '~/api/user';
 import { FcGoogle } from 'react-icons/fc/index.js';
 import { Input } from '~/components/ui/input';
 import { Link, useNavigate } from '@remix-run/react';
 import { Label } from '~/components/ui/label';
 import { useAuthLayout } from '~/routes/u';
+import { useToast } from '~/components/ui/use-toast';
 
 export default function Page() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const { setEmail, email } = useAuthLayout();
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    const emailIsValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+    if (!emailIsValid) {
+      toast({ description: 'Invalid email', duration: 1000 });
+      return;
+    }
     navigate('/u/login/password');
   };
 
@@ -22,7 +29,7 @@ export default function Page() {
         <Text variant="h2">Welcome back</Text>
       </div>
 
-      <form className="flex flex-col gap-4 mt-5" onSubmit={onSubmit}>
+      <form noValidate className="flex flex-col gap-4 mt-5" onSubmit={onSubmit}>
         <Label>Email address</Label>
         <Input
           autoFocus
@@ -53,7 +60,7 @@ export default function Page() {
       </div>
 
       <div className="mx-auto w-full">
-        <Button fullWidth icon={<FcGoogle />} variant="outline" onClick={() => signIn('google')}>
+        <Button fullWidth icon={<FcGoogle />} variant="outline" onClick={() => signInWithGoogle()}>
           Continue with Google
         </Button>
       </div>

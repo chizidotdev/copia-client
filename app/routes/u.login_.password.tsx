@@ -1,17 +1,16 @@
 import { Text } from '~/components/ui/text';
 import { Button } from '~/components/ui/button';
-import { signIn } from '~/api/user';
 import { Input } from '~/components/ui/input';
 import { Link, useNavigate } from '@remix-run/react';
 import { Label } from '~/components/ui/label';
 import { useAuthLayout } from '~/routes/u';
 import { useLayoutEffect } from 'react';
-import { useToast } from '~/components/ui/use-toast';
+import { useSignIn } from '~/modules/user';
 
 export default function Page() {
   const { email, password, setPassword } = useAuthLayout();
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const { mutate } = useSignIn();
 
   useLayoutEffect(() => {
     if (!email) navigate('/u/login');
@@ -19,13 +18,7 @@ export default function Page() {
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    const response = await signIn('email', { email, password });
-    if (response?.status === 200) {
-      toast({
-        description: 'Login successful.',
-      });
-      navigate('/dashboard');
-    }
+    mutate({ email, password });
   };
 
   return (

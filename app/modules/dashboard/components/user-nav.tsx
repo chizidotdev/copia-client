@@ -13,13 +13,16 @@ import {
 import { getUser, signOut } from '~/api/user';
 import { useNavigate } from '@remix-run/react';
 import { useQuery } from 'react-query';
+import { useToast } from '~/components/ui/use-toast';
 
 export function UserNav() {
   const navigate = useNavigate();
   const { data } = useQuery('', { queryFn: getUser });
+  const { toast } = useToast();
 
   const handleLogout = async () => {
     await signOut();
+    toast({ description: 'Logged out successfully.', variant: 'success' });
     navigate('/u/login');
   };
 
