@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '@/lib/constants';
+import { BASE_URL } from '~/lib/constants';
 
 const api = {
     async get<T>(url?: string) {

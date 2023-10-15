@@ -65,7 +65,7 @@ export default function Page() {
         </div>
       </form>
       <div className="text-center mt-5">
-        Don't have an account? &nbsp;<Link to="/auth/register">Sign up</Link>
+        Don't have an account? &nbsp;<Link to="/u/register">Sign up</Link>
       </div>
     </>
   );

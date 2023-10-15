@@ -38,22 +38,26 @@ export const signIn = async <T extends Providers>(provider: T, options?: EmailOp
     const response = await axios.post(
         `${BASE_URL}/login`,
         { email, password },
+      {withCredentials: true}
     );
     return response;
 };
 
-export const getUser = async (): Promise<User | string> => {
+export const getUser = async (): Promise<User | undefined> => {
     try {
         const response = await axios.get(`${BASE_URL}/user`, {
             withCredentials: true,
         });
         return response.data;
     } catch (error) {
-        return (error as Error).message;
+        console.log((error as Error).message)
+        return;
     }
 };
 
 export const signOut = async (): Promise<any> => {
-    const response = await axios.get(`${BASE_URL}/logout`);
+    const response = await axios.get(`${BASE_URL}/logout`, {
+        withCredentials: true
+    });
     return response.data;
 };
