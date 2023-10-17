@@ -30,8 +30,27 @@ export const signIn = async (options: { email: string; password: string }) => {
   );
   return response;
 };
+
 export const signInWithGoogle = async () => {
-  window.location.href = `${BASE_URL}/login/google`;
+  const REDIRECT_URI = `${window.location.origin}/dashboard`;
+  const GOOGLE_AUTH_URL = `${BASE_URL}/login/google`;
+  const browserWindow = window.open(GOOGLE_AUTH_URL, 'Google Sign In', 'width=800,height=600');
+
+  async function verify() {
+    try {
+      await axios.get(`${BASE_URL}/user`, { withCredentials: true });
+      window.location.href = REDIRECT_URI;
+    } catch (error) {
+      return;
+    }
+  }
+
+  let interval = setInterval(() => {
+    if (browserWindow?.closed) {
+      verify();
+      clearInterval(interval);
+    }
+  }, 1000);
 };
 
 export const getUser = async (): Promise<User | undefined> => {
