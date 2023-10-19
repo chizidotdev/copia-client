@@ -8,11 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { MainNav } from './components/main-nav';
-import { Overview } from './components/overview';
-import { RecentSales } from './components/recent-sales';
-import { Search } from './components/search';
-import { UserNav } from './components/user-nav';
+import { MainNav, Overview, RecentSales, Search, UserNav } from './components';
 
 export function DashboardPage() {
   return (

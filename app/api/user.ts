@@ -23,8 +23,7 @@ export const signup = async ({
   return response.data;
 };
 
-export const signIn = async (options: { email: string; password: string }) => {
-  const { email, password } = options!;
+export const signIn = async ({ email, password }: LoginRequest) => {
   const response = await axios.post(
     `${BASE_URL}/login`,
     { email, password },

@@ -9,8 +9,14 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  HydrationBoundary,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
+import { useDehydratedState } from 'use-dehydrated-state';
 import styles from './globals.css';
 
 export const links: LinksFunction = () => [
@@ -52,11 +58,25 @@ export default function App() {
 }
 
 function Providers({ children }: { children: React.ReactNode }) {
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            // With SSR, we usually want to set some default staleTime
+            // above 0 to avoid refetching immediately on the client
+            staleTime: 60 * 1000,
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  );
+  const dehydratedState = useDehydratedState();
+
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
-
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { refetchOnWindowFocus: false } },
-});
