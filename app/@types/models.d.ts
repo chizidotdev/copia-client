@@ -1,11 +1,11 @@
-export type User = {
+interface User {
   id: string;
   email: string;
   first_name: string;
   last_name: string;
-};
+}
 
-export type Order = {
+interface Order {
   id: string;
   created_at: string;
   updated_at: string;
@@ -24,31 +24,31 @@ export type Order = {
   order_items: OrderItem[];
   customer_id: string;
   user_email: string;
-};
+}
 
-export type OrderStatus = 'pending' | 'delivered' | 'shipped' | 'canceled';
+type OrderStatus = 'pending' | 'delivered' | 'shipped' | 'canceled';
 
-export type OrderItem = {
+interface OrderItem {
   id: string;
   order_id: string;
   product_id: string;
   quantity: number;
   unit_price: number;
   sub_total: number;
-};
+}
 
-export type Inventory = {
+interface Inventory {
   total_items: number;
   low_stock_items: number;
   recent_sales: number;
   pending_orders: number;
   sales_performance: number;
-  price_sold_by_date: {
-    date: string;
-    total_sale_price: number;
-  }[];
-  price_sold_by_week: {
-    date: string;
-    total_sale_price: number;
-  }[];
-};
+
+  price_sold_by_date: SoldBy[];
+  price_sold_by_week: SoldBy[];
+}
+
+interface SoldBy {
+  date: string;
+  total_sale_price: number;
+}

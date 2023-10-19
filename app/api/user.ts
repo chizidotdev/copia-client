@@ -1,5 +1,4 @@
 import { BASE_URL } from '@/lib/constants';
-import type { User } from '@/lib/types';
 import axios from 'axios';
 
 type LoginRequest = {

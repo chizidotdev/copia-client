@@ -1,5 +1,4 @@
-import { BASE_URL } from '~lib/constants';
-import { Inventory } from '~lib/types';
+import { BASE_URL } from '@/lib/constants';
 import axios from 'axios';
 
 export const getInventory = async (): Promise<Inventory> => {

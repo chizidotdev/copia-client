@@ -17,7 +17,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export function UserNav() {
   const navigate = useNavigate();
-  const { data } = useQuery({ queryKey: ['todos'], queryFn: getUser });
+  const { data } = useQuery({ queryKey: ['user'], queryFn: getUser });
   const { toast } = useToast();
 
   const handleLogout = async () => {

@@ -69,8 +69,6 @@ const addToRemoveQueue = (toasterId: string) => {
   toasterTimeouts.set(toasterId, timeout);
 };
 
-const dismissToaster = (toasterId?: string) => {};
-
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'ADD_TOASTER':

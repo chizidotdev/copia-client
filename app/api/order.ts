@@ -1,6 +1,5 @@
 import api from '@/api';
 import { BASE_URL } from '@/lib/constants';
-import type { Order } from '@/lib/types';
 import axios from 'axios';
 
 export const getOrders = async (): Promise<Order[]> => {
