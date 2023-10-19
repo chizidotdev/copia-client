@@ -1,7 +1,7 @@
-import { AppLogo } from '~/components/app-logo';
+import { AppLogo } from '@/components/app-logo';
 import { Outlet } from '@remix-run/react';
-import { createContext, useContext, useState } from 'react';
 import type { ChangeEventHandler } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 type AuthLayoutContextType = {
   email: string;
@@ -30,15 +30,20 @@ export default function AuthLayout() {
     updatePassword(e.target.value);
   };
 
-  const value: AuthLayoutContextType = { email, password, setEmail, setPassword };
+  const value: AuthLayoutContextType = {
+    email,
+    password,
+    setEmail,
+    setPassword,
+  };
 
   return (
-    <div className="mx-5">
-      <div className="w-fit mx-auto my-10">
+    <div className='mx-5'>
+      <div className='mx-auto my-10 w-fit'>
         <AppLogo />
       </div>
 
-      <div className="flex flex-col h-[70vh] justify-center max-w-sm mx-auto px-5">
+      <div className='mx-auto flex h-[70vh] max-w-sm flex-col justify-center px-5'>
         <AuthLayoutContext.Provider value={value}>
           <Outlet />
         </AuthLayoutContext.Provider>

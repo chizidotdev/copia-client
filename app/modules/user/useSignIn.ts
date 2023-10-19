@@ -1,7 +1,7 @@
+import { signIn } from '@/api/user';
+import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from '@remix-run/react';
-import { useToast } from '~/components/ui/use-toast';
-import { useMutation } from 'react-query';
-import { signIn } from '~/api/user';
+import { useMutation } from '@tanstack/react-query';
 
 export const useSignIn = () => {
   const navigate = useNavigate();
@@ -10,7 +10,11 @@ export const useSignIn = () => {
   return useMutation({
     mutationFn: signIn,
     onError: (err: any) => {
-      toast({ description: err.response.data, variant: 'destructive', duration: 3000 });
+      toast({
+        description: err.response.data,
+        variant: 'destructive',
+        duration: 3000,
+      });
     },
     onSuccess: () => {
       toast({ description: 'Login successful.', variant: 'success' });
