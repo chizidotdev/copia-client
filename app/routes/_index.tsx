@@ -2,7 +2,10 @@ import type { MetaFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }];
+  return [
+    { title: 'New Remix App' },
+    { name: 'description', content: 'Welcome to Remix!' },
+  ];
 };
 
 export default function Index() {
@@ -11,10 +14,10 @@ export default function Index() {
       <h1>Welcome to Remix</h1>
       <ul>
         <li>
-          <Link to="/u/login">Login</Link>
+          <Link to='/u/login'>Login</Link>
         </li>
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to='/dashboard'>Dashboard</Link>
         </li>
       </ul>
     </div>

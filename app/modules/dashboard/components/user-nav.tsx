@@ -1,5 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import { Button } from '~/components/ui/button';
+import { getUser, signOut } from '@/api/user';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,15 +10,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
-import { getUser, signOut } from '~/api/user';
+} from '@/components/ui/dropdown-menu';
+import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from '@remix-run/react';
-import { useQuery } from 'react-query';
-import { useToast } from '~/components/ui/use-toast';
+import { useQuery } from '@tanstack/react-query';
 
 export function UserNav() {
   const navigate = useNavigate();
-  const { data } = useQuery('', { queryFn: getUser });
+  const { data } = useQuery({ queryKey: ['user'], queryFn: getUser });
   const { toast } = useToast();
 
   const handleLogout = async () => {
@@ -29,18 +29,22 @@ export function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
+        <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
+          <Avatar className='h-8 w-8'>
             <AvatarImage />
             <AvatarFallback>{data?.first_name[0].toUpperCase()}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{data?.first_name}</p>
-            <p className="text-xs leading-none text-muted-foreground">{data?.email}</p>
+      <DropdownMenuContent className='w-56' align='end' forceMount>
+        <DropdownMenuLabel className='font-normal'>
+          <div className='flex flex-col space-y-1'>
+            <p className='text-sm font-medium leading-none'>
+              {data?.first_name}
+            </p>
+            <p className='text-xs leading-none text-muted-foreground'>
+              {data?.email}
+            </p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

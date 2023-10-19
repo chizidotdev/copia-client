@@ -1,13 +1,15 @@
+import { BASE_URL } from '@/lib/constants';
 import axios from 'axios';
-import { BASE_URL } from '~/lib/constants';
-import type { User } from '~/lib/types';
 
 type LoginRequest = {
   email: string;
   password: string;
 };
 
-export const signup = async ({ email, password }: LoginRequest): Promise<string> => {
+export const signup = async ({
+  email,
+  password,
+}: LoginRequest): Promise<string> => {
   const response = await axios.post(
     `${BASE_URL}/signup`,
     { email, password },
@@ -21,8 +23,7 @@ export const signup = async ({ email, password }: LoginRequest): Promise<string>
   return response.data;
 };
 
-export const signIn = async (options: { email: string; password: string }) => {
-  const { email, password } = options!;
+export const signIn = async ({ email, password }: LoginRequest) => {
   const response = await axios.post(
     `${BASE_URL}/login`,
     { email, password },
@@ -34,7 +35,11 @@ export const signIn = async (options: { email: string; password: string }) => {
 export const signInWithGoogle = async () => {
   const REDIRECT_URI = `${window.location.origin}/dashboard`;
   const GOOGLE_AUTH_URL = `${BASE_URL}/login/google`;
-  const browserWindow = window.open(GOOGLE_AUTH_URL, 'Google Sign In', 'width=800,height=600');
+  const browserWindow = window.open(
+    GOOGLE_AUTH_URL,
+    'Google Sign In',
+    'width=800,height=600'
+  );
 
   async function verify() {
     try {
