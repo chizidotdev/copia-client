@@ -1,28 +1,20 @@
 import { BASE_URL } from '@/lib/constants';
 import axios from 'axios';
 
+type RegisterRequest = {
+  email: string;
+  password: string;
+};
+export const signup = async (data: RegisterRequest) => {
+  return await axios.post(`${BASE_URL}/register`, data, {
+    withCredentials: true,
+  });
+};
+
 type LoginRequest = {
   email: string;
   password: string;
 };
-
-export const signup = async ({
-  email,
-  password,
-}: LoginRequest): Promise<string> => {
-  const response = await axios.post(
-    `${BASE_URL}/signup`,
-    { email, password },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-
-  return response.data;
-};
-
 export const signIn = async ({ email, password }: LoginRequest) => {
   const response = await axios.post(
     `${BASE_URL}/login`,
