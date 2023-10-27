@@ -75,8 +75,10 @@ function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <HydrationBoundary state={dehydratedState}>
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </HydrationBoundary>
     </QueryClientProvider>
   );
 }
