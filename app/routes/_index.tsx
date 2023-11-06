@@ -14,7 +14,9 @@ export default function Index() {
       <h1>Welcome to Remix</h1>
       <ul>
         <li>
-          <Link to='/u/login'>Login</Link>
+          <Link to='/u/login' reloadDocument>
+            Login
+          </Link>
         </li>
         <li>
           <Link to='/dashboard'>Dashboard</Link>
