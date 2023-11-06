@@ -1,12 +1,12 @@
 import { BASE_URL } from '@/lib/constants';
-import axios from 'axios';
+import client from './client';
 
 type RegisterRequest = {
   email: string;
   password: string;
 };
 export const signup = async (data: RegisterRequest) => {
-  return await axios.post(`${BASE_URL}/register`, data, {
+  return await client.post(`/register`, data, {
     withCredentials: true,
   });
 };
@@ -16,7 +16,7 @@ type LoginRequest = {
   password: string;
 };
 export const signIn = async ({ email, password }: LoginRequest) => {
-  const response = await axios.post(
+  const response = await client.post(
     `${BASE_URL}/login`,
     { email, password },
     { withCredentials: true }
@@ -35,14 +35,17 @@ export const signInWithGoogle = async () => {
 
   async function verify() {
     try {
-      await axios.get(`${BASE_URL}/user`, { withCredentials: true });
+      await client.get(`${BASE_URL}/user`, { withCredentials: true });
       window.location.href = REDIRECT_URI;
     } catch (error) {
       return;
     }
   }
 
-  let interval = setInterval(() => {
+  let interval: NodeJS.Timeout | undefined;
+  clearInterval(interval);
+
+  interval = setInterval(() => {
     if (browserWindow?.closed) {
       verify();
       clearInterval(interval);
@@ -52,10 +55,10 @@ export const signInWithGoogle = async () => {
 
 export const getUser = async (): Promise<User | undefined> => {
   try {
-    const response = await axios.get(`${BASE_URL}/user`, {
+    const response = await client.get(`/user`, {
       withCredentials: true,
     });
-    return response.data;
+    return response as User;
   } catch (error) {
     console.log((error as Error).message);
     return;
@@ -63,8 +66,8 @@ export const getUser = async (): Promise<User | undefined> => {
 };
 
 export const signOut = async (): Promise<any> => {
-  const response = await axios.get(`${BASE_URL}/logout`, {
+  const response = await client.get(`/logout`, {
     withCredentials: true,
   });
-  return response.data;
+  return response;
 };

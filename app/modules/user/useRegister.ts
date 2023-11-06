@@ -1,8 +1,9 @@
 import { signup } from '@/api/user';
-import { useToast } from '@/components/ui/use-toast';
+import { useStateForm, useToast } from '@/hooks';
 import { useNavigate } from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
-import { type ChangeEventHandler, useState } from 'react';
+
+type ReactInputEventHandler = React.ChangeEventHandler<HTMLInputElement>;
 
 export const useRegister = () => {
   const navigate = useNavigate();
@@ -25,27 +26,27 @@ export const useRegister = () => {
 };
 
 export const useRegisterData = () => {
-  const [data, setData] = useState({
+  const [data, update] = useStateForm({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
   });
 
-  const setFirstName: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setData((data) => ({ ...data, firstName: e.target.value }));
+  const setFirstName: ReactInputEventHandler = (e) => {
+    update('firstName', e.target.value);
   };
 
-  const setLastName: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setData((data) => ({ ...data, lastName: e.target.value }));
+  const setLastName: ReactInputEventHandler = (e) => {
+    update('lastName', e.target.value);
   };
 
-  const setEmail: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setData((data) => ({ ...data, email: e.target.value }));
+  const setEmail: ReactInputEventHandler = (e) => {
+    update('email', e.target.value);
   };
 
-  const setPassword: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setData((data) => ({ ...data, password: e.target.value }));
+  const setPassword: ReactInputEventHandler = (e) => {
+    update('password', e.target.value);
   };
 
   return {

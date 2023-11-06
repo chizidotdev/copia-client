@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useNavigate } from '@remix-run/react';
+import axios from 'axios';
 import { useEffect } from 'react';
 
 export function useInterceptors() {
@@ -22,5 +22,38 @@ export function useInterceptors() {
         return Promise.reject(error);
       }
     );
-  }, []);
+  }, [navigate]);
+}
+
+function useInterceptor() {
+  const navigate = useNavigate();
+
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      const status = error.response ? error.response.status : null;
+
+      if (status === 401) {
+        // Handle unauthorized access
+        if (error.response.status === 401) {
+          navigate('/u/login');
+        }
+      } else if (status === 404) {
+        // Handle not found errors
+      } else {
+        // Handle other errors
+      }
+
+      return Promise.reject(error);
+    }
+  );
+
+  //   // Creating an interceptor and storing its reference
+  // const axiosInterceptor = axios.interceptors.request.use(config => {
+  //   // Modify the request config
+  //   return config;
+  // });
+
+  // // Removing the interceptor
+  // axios.interceptors.request.eject(axiosInterceptor);
 }
