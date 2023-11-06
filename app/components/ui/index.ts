@@ -9,6 +9,3 @@ export * from './popover';
 export * from './tabs';
 export * from './text';
 export * from './toast';
-export * from './toaster';
-export * from './use-toast';
-export * from './use-toaster';
