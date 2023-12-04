@@ -35,6 +35,8 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
+  interceptors();
+
   return (
     <html lang='en'>
       <head>

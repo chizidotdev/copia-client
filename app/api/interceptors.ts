@@ -1,26 +1,20 @@
 import axios from 'axios';
-import { useNavigate } from '@remix-run/react';
-import { useEffect } from 'react';
 
-export function useInterceptors() {
-  const navigate = useNavigate();
+export function interceptors() {
+  axios.interceptors.request.use(async (config) => {
+    config.headers['Content-Type'] = 'application/json';
+    config.withCredentials = true;
+    return config;
+  });
 
-  useEffect(() => {
-    axios.interceptors.request.use(async (config) => {
-      config.headers['Content-Type'] = 'application/json';
-      config.withCredentials = true;
-      return config;
-    });
-
-    // navigate to login page if 401 error
-    axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response.status === 401) {
-          navigate('/u/login');
-        }
-        return Promise.reject(error);
+  // navigate to login page if 401 error
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response.status === 401) {
+        window.location.href = '/u/login';
       }
-    );
-  }, []);
+      return Promise.reject(error);
+    }
+  );
 }
