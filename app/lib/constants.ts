@@ -1,1 +1,2 @@
-export const BASE_URL = process.env.PUBLIC_SITE_URL || '';
+export const BASE_URL = 'https://server.copia.aidmedium.com';
+// export const BASE_URL =  'http://localhost:8080' 

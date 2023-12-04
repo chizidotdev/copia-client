@@ -18,6 +18,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
 import { useDehydratedState } from 'use-dehydrated-state';
 import styles from './globals.css';
+import { interceptors } from './api/interceptors';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
