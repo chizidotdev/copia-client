@@ -63,7 +63,7 @@ export const getUser = async (): Promise<User | undefined> => {
 };
 
 export const signOut = async (): Promise<any> => {
-  const response = await axios.get(`${BASE_URL}/logout`, {
+  const response = await axios.post(`${BASE_URL}/logout`, {
     withCredentials: true,
   });
   return response.data;
