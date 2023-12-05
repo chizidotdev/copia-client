@@ -68,3 +68,14 @@ export const signOut = async (): Promise<any> => {
   });
   return response.data;
 };
+
+export const resetPassword = async (payload: { email: string }) => {
+  const response = await axios.post(`${BASE_URL}/reset-password`, payload);
+  return response;
+};
+
+type ChangePasswordRequest = { password: string; token: string };
+export const changePassword = async (payload: ChangePasswordRequest) => {
+  const response = await axios.post(`${BASE_URL}/change-password`, payload);
+  return response;
+};

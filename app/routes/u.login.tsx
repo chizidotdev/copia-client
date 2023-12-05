@@ -17,7 +17,7 @@ export default function Page() {
     e.preventDefault();
     const emailIsValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
     if (!emailIsValid) {
-      toast({ description: 'Invalid email', duration: 1000 });
+      toast({ description: 'Invalid email', variant: 'destructive' });
       return;
     }
     navigate('/u/login/password');
@@ -48,6 +48,9 @@ export default function Page() {
       </form>
       <div className='mt-5 text-center'>
         Don't have an account? &nbsp;<Link to='/u/register'>Sign up</Link>
+      </div>
+      <div className='mt-1 text-center'>
+        <Link to='/u/reset-password'>Forgot password?</Link>
       </div>
 
       <div className='relative my-6'>
