@@ -8,6 +8,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
 } from '@remix-run/react';
 import {
   HydrationBoundary,
@@ -19,6 +20,7 @@ import React from 'react';
 import { useDehydratedState } from 'use-dehydrated-state';
 import styles from './globals.css';
 import { interceptors } from './api/interceptors';
+import { Error } from './error';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
@@ -55,6 +57,26 @@ export default function App() {
         <Scripts />
         <LiveReload />
         <Toaster />
+      </body>
+    </html>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  console.error(error);
+
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <link rel='shortcut icon' href='/logo.svg' type='image/x-icon' />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Error />
+        <Scripts />
       </body>
     </html>
   );
