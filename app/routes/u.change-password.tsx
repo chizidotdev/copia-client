@@ -4,8 +4,22 @@ import { Label } from '@/components/ui/label';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/use-toast';
 import { useChangePassword } from '@/modules/user/useResetPassword';
+import { redirect, type LoaderFunctionArgs } from '@remix-run/node';
 import { Link, useLocation } from '@remix-run/react';
 import { useState } from 'react';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const url = new URL(request.url);
+  const code = url.searchParams.get('code');
+
+  if (!code) {
+    // If there is no code, we can't reset the password
+    // so we redirect to the reset password page
+    throw redirect('/u/reset-password');
+  }
+
+  return null;
+}
 
 export default function Page() {
   const { toast } = useToast();
