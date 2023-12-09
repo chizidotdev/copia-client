@@ -1,7 +1,7 @@
 import { useGetUser } from '@/modules/user/useGetUser';
 import { createContext, useContext } from 'react';
 
-const GlobalContext = createContext({} as { user: User });
+const GlobalContext = createContext({} as { user: User | undefined });
 export const GlobalContextProvider = ({
   children,
 }: {
@@ -11,9 +11,7 @@ export const GlobalContextProvider = ({
   const user = data?.data;
 
   return (
-    <GlobalContext.Provider value={{ user: user! }}>
-      {children}
-    </GlobalContext.Provider>
+    <GlobalContext.Provider value={{ user }}>{children}</GlobalContext.Provider>
   );
 };
 

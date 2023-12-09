@@ -46,8 +46,8 @@ export const signInWithGoogle = async () => {
 };
 
 export const getUser = async (): Promise<APIResponse<User> | undefined> => {
-  const isAuthPage = window.location.href.includes('/u/');
-  // if user is on auth page, don't fetch user
+  const isAuthPage = window.location.href.includes('/u/register');
+  // if user is on registration page, don't fetch user
   if (isAuthPage) return;
 
   const response = await axios.get(`${BASE_URL}/user`);
