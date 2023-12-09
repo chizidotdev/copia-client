@@ -13,17 +13,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useToast } from '@/components/ui/use-toast';
 import { useGlobals } from '@/store';
-import { useNavigate } from '@remix-run/react';
 
 export function UserNav() {
   const { user } = useGlobals();
-  const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleLogout = async () => {
     await signOut();
     toast({ description: 'Logged out successfully.', variant: 'success' });
-    navigate('/u/login');
+    window.location.href = '/u/login';
   };
 
   return (
