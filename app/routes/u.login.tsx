@@ -5,13 +5,22 @@ import { Label } from '@/components/ui/label';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuthLayout } from '@/routes/u';
+import { useGlobals } from '@/store';
 import { Link, useNavigate } from '@remix-run/react';
+import { useEffect } from 'react';
 import { FcGoogle } from 'react-icons/fc/index.js';
 
 export default function Page() {
+  const { user } = useGlobals();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { setEmail, email } = useAuthLayout();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/', { replace: true });
+    }
+  }, [user, navigate]);
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
