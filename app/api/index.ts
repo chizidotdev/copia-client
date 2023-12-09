@@ -26,3 +26,11 @@ const api = {
 };
 
 export default api;
+
+export const getError = (error: any): ErrorResponse => {
+  return (
+    error.response?.data?.error || {
+      message: 'Something went wrong',
+    }
+  );
+};

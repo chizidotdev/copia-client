@@ -1,3 +1,4 @@
+import { getError } from '@/api';
 import { changePassword, resetPassword } from '@/api/user';
 import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from '@remix-run/react';
@@ -10,8 +11,9 @@ export const useResetPassword = () => {
   return useMutation({
     mutationFn: resetPassword,
     onError: (err: any) => {
+      const error = getError(err);
       toast({
-        description: err.response.data,
+        description: error.message,
         variant: 'destructive',
         duration: 3000,
       });
@@ -30,14 +32,18 @@ export const useChangePassword = () => {
   return useMutation({
     mutationFn: changePassword,
     onError: (err: any) => {
+      const error = getError(err);
       toast({
-        description: err.response.data,
+        description: error.message,
         variant: 'destructive',
         duration: 3000,
       });
     },
     onSuccess: () => {
-      toast({ description: 'Password changed successfully.', variant: 'success' });
+      toast({
+        description: 'Password changed successfully.',
+        variant: 'success',
+      });
       navigate('/dashboard');
     },
   });

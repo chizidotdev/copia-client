@@ -1,15 +1,13 @@
 import { getError } from '@/api';
-import { signIn } from '@/api/user';
+import { verifyEmail } from '@/api/user';
 import { useToast } from '@/components/ui/use-toast';
-import { useNavigate } from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
 
-export const useSignIn = () => {
-  const navigate = useNavigate();
+export const useVerifyEmail = () => {
   const { toast } = useToast();
 
   return useMutation({
-    mutationFn: signIn,
+    mutationFn: verifyEmail,
     onError: (err: any) => {
       const error = getError(err);
       toast({
@@ -19,8 +17,7 @@ export const useSignIn = () => {
       });
     },
     onSuccess: () => {
-      toast({ description: 'Login successful.', variant: 'success' });
-      navigate('/dashboard');
+      toast({ description: 'Email verified!', variant: 'success' });
     },
   });
 };

@@ -6,9 +6,8 @@ type RegisterRequest = {
   password: string;
 };
 export const signup = async (data: RegisterRequest) => {
-  return await axios.post(`${BASE_URL}/register`, data, {
-    withCredentials: true,
-  });
+  const response = await axios.post(`${BASE_URL}/register`, data);
+  return response.data;
 };
 
 type LoginRequest = {
@@ -16,12 +15,8 @@ type LoginRequest = {
   password: string;
 };
 export const signIn = async ({ email, password }: LoginRequest) => {
-  const response = await axios.post(
-    `${BASE_URL}/login`,
-    { email, password },
-    { withCredentials: true }
-  );
-  return response;
+  const response = await axios.post(`${BASE_URL}/login`, { email, password });
+  return response.data;
 };
 
 export const signInWithGoogle = async () => {
@@ -35,7 +30,7 @@ export const signInWithGoogle = async () => {
 
   async function verify() {
     try {
-      await axios.get(`${BASE_URL}/user`, { withCredentials: true });
+      await axios.get(`${BASE_URL}/user`);
       window.location.href = REDIRECT_URI;
     } catch (error) {
       return;
@@ -50,32 +45,28 @@ export const signInWithGoogle = async () => {
   }, 1000);
 };
 
-export const getUser = async (): Promise<User | undefined> => {
-  try {
-    const response = await axios.get(`${BASE_URL}/user`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    console.log((error as Error).message);
-    return;
-  }
+export const getUser = async (): Promise<APIResponse<User> | undefined> => {
+  const response = await axios.get(`${BASE_URL}/user`);
+  return response.data;
 };
 
-export const signOut = async (): Promise<any> => {
-  const response = await axios.post(`${BASE_URL}/logout`, {
-    withCredentials: true,
-  });
+export const signOut = async (): Promise<APIResponse<string>> => {
+  const response = await axios.post(`${BASE_URL}/logout`);
   return response.data;
 };
 
 export const resetPassword = async (payload: { email: string }) => {
   const response = await axios.post(`${BASE_URL}/reset-password`, payload);
-  return response;
+  return response.data;
 };
 
-type ChangePasswordRequest = { password: string; token: string };
+type ChangePasswordRequest = { password: string; code: string };
 export const changePassword = async (payload: ChangePasswordRequest) => {
   const response = await axios.post(`${BASE_URL}/change-password`, payload);
-  return response;
+  return response.data;
+};
+
+export const verifyEmail = async (payload: { code: string }) => {
+  const response = await axios.post(`${BASE_URL}/verify-email`, payload);
+  return response.data;
 };

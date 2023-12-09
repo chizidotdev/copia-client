@@ -1,3 +1,4 @@
+import { getError } from '@/api';
 import { signup } from '@/api/user';
 import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from '@remix-run/react';
@@ -11,8 +12,9 @@ export const useRegister = () => {
   return useMutation({
     mutationFn: signup,
     onError: (err: any) => {
+      const error = getError(err);
       toast({
-        description: err.response.data,
+        description: error.message,
         variant: 'destructive',
         duration: 3000,
       });

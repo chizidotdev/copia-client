@@ -11,7 +11,10 @@ export function interceptors() {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response.status === 401) {
+      if (
+        error.response.status === 401 &&
+        !window.location.href.includes('/u/')
+      ) {
         window.location.href = '/u/login';
       }
       return Promise.reject(error);

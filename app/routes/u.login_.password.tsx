@@ -18,7 +18,14 @@ export default function Page() {
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    mutate({ email, password });
+    mutate(
+      { email, password },
+      {
+        onError: (error) => {
+          console.log(error);
+        },
+      }
+    );
   };
 
   return (

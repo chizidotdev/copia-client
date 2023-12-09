@@ -1,13 +1,11 @@
 import { BASE_URL } from '@/lib/constants';
 import axios from 'axios';
 
-export const getOrders = async (): Promise<Order[]> => {
-  try {
-    return await axios.get(`${BASE_URL}/orders`, { withCredentials: true });
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
+export const getOrders = async (): Promise<
+  APIResponse<Order[]> | undefined
+> => {
+  const response = await axios.get(`${BASE_URL}/orders`);
+  return response.data;
 };
 
 export const getOrderById = async (id: string): Promise<Order | undefined> => {
