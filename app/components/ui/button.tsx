@@ -34,6 +34,13 @@ const buttonVariants = cva(
       variant: 'default',
       size: 'default',
     },
+    compoundVariants: [
+      {
+        variant: 'link',
+        size: 'default',
+        className: 'p-0 h-auto',
+      },
+    ],
   }
 );
 

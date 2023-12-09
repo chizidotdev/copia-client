@@ -70,3 +70,8 @@ export const verifyEmail = async (payload: { code: string }) => {
   const response = await axios.post(`${BASE_URL}/verify-email`, payload);
   return response.data;
 };
+
+export const sendVerificationEmail = async (payload: { email: string }) => {
+  const response = await axios.post(`${BASE_URL}/send-verification-email`, payload);
+  return response.data;
+};

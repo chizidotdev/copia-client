@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MainNav, Overview, RecentSales, Search, UserNav } from './components';
+import { VerifyEmailAlert } from './components/verifyEmailAlert';
 
 export function DashboardPage() {
   return (
@@ -24,6 +25,7 @@ export function DashboardPage() {
           </div>
         </div>
 
+        <VerifyEmailAlert />
         <DemoBanner />
 
         <div className='flex-1 space-y-4 p-5 pt-6 sm:p-8'>
