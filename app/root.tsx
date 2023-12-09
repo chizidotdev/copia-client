@@ -21,6 +21,7 @@ import { useDehydratedState } from 'use-dehydrated-state';
 import styles from './globals.css';
 import { interceptors } from './api/interceptors';
 import { Error } from './error';
+import { GlobalContextProvider } from './store/GlobalContext';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
@@ -100,7 +101,9 @@ function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
+      <HydrationBoundary state={dehydratedState}>
+        <GlobalContextProvider>{children}</GlobalContextProvider>
+      </HydrationBoundary>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

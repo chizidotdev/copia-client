@@ -1,13 +1,10 @@
 import { Alert, AlertDescription, Button } from '@/components';
 import { useSendVerificationEmail } from '@/modules/user/useVerifyEmail';
+import { useGlobals } from '@/store';
 import { GrCircleAlert } from 'react-icons/gr/index.js';
 
 export function VerifyEmailAlert() {
-  // const { user } = useGlobals();
-  const user = {
-    email: '',
-    emailVerified: false,
-  };
+  const { user } = useGlobals();
   const { mutate } = useSendVerificationEmail();
 
   if (!user || user.emailVerified) return null;
