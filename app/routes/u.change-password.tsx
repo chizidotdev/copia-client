@@ -4,8 +4,8 @@ import { Label } from '@/components/ui/label';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/use-toast';
 import { useChangePassword } from '@/modules/user/useResetPassword';
-import { redirect, type LoaderFunctionArgs } from '@remix-run/node';
-import { Link, useLocation } from '@remix-run/react';
+import { redirect, type LoaderFunctionArgs, json } from '@remix-run/node';
+import { Link, useLoaderData } from '@remix-run/react';
 import { useState } from 'react';
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -18,24 +18,23 @@ export async function loader({ request }: LoaderFunctionArgs) {
     throw redirect('/u/reset-password');
   }
 
-  return null;
+  return json({ code });
 }
 
 export default function Page() {
+  const { code } = useLoaderData<typeof loader>();
   const { toast } = useToast();
   const { data, setPassword, setConfirmPassword } = useChangePasswordData();
   const { mutate, isPending } = useChangePassword();
-  const location = useLocation();
-  const token = new URLSearchParams(location.search).get('code') || '';
-  const passwordsMatch = data.password === data.confirmPassword;
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    const passwordsMatch = data.password === data.confirmPassword;
     if (!passwordsMatch) {
       toast({ description: 'Passwords do not match', variant: 'destructive' });
       return;
     }
-    mutate({ password: data.password, token });
+    mutate({ password: data.password, code });
   };
 
   return (

@@ -18,7 +18,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Page() {
   const { data } = useQuery({ queryKey: ['orders'], queryFn: getOrders });
-  console.log(data)
+  const orders = data?.data;
+  console.log(orders);
 
   return <DashboardPage />;
 }
