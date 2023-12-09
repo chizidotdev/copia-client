@@ -1,5 +1,4 @@
-import { getUser } from '@/api/user';
-import { useQuery } from '@tanstack/react-query';
+import { useGetUser } from '@/modules/user/useGetUser';
 import { createContext, useContext } from 'react';
 
 const GlobalContext = createContext({} as { user: User });
@@ -8,7 +7,7 @@ export const GlobalContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { data } = useQuery({ queryKey: ['user'], queryFn: getUser });
+  const { data } = useGetUser();
   const user = data?.data;
 
   return (

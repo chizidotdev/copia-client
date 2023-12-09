@@ -46,6 +46,10 @@ export const signInWithGoogle = async () => {
 };
 
 export const getUser = async (): Promise<APIResponse<User> | undefined> => {
+  const isAuthPage = window.location.href.includes('/u/');
+  // if user is on auth page, don't fetch user
+  if (isAuthPage) return;
+
   const response = await axios.get(`${BASE_URL}/user`);
   return response.data;
 };
@@ -72,6 +76,9 @@ export const verifyEmail = async (payload: { code: string }) => {
 };
 
 export const sendVerificationEmail = async (payload: { email: string }) => {
-  const response = await axios.post(`${BASE_URL}/send-verification-email`, payload);
+  const response = await axios.post(
+    `${BASE_URL}/send-verification-email`,
+    payload
+  );
   return response.data;
 };
