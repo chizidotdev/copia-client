@@ -2,6 +2,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { GrCircleAlert } from 'react-icons/gr/index.js';
 
 export function DemoBanner() {
+  return null;
+
   return (
     <div className='m-5 mb-0'>
       <Alert>

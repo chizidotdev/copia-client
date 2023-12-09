@@ -1,4 +1,4 @@
-import { getUser, signOut } from '@/api/user';
+import { signOut } from '@/api/user';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,13 +12,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useToast } from '@/components/ui/use-toast';
+import { useGlobals } from '@/store';
 import { useNavigate } from '@remix-run/react';
-import { useQuery } from '@tanstack/react-query';
 
 export function UserNav() {
+  const { user } = useGlobals();
   const navigate = useNavigate();
-  const { data } = useQuery({ queryKey: ['user'], queryFn: getUser });
-  const user = data?.data;
   const { toast } = useToast();
 
   const handleLogout = async () => {

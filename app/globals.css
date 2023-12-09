@@ -20,6 +20,8 @@
     --accent-foreground: 222.2 47.4% 11.2%;
     --success: 142.1 76.2% 36.3%;
     --success-foreground: 355.7 100% 97.3%;
+    --warning: 45 100% 45%; /* Adjust these values as per your color scheme */
+    --warning-foreground: 0 0% 100%; /* Adjust these values as per your color scheme */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
@@ -45,6 +47,8 @@
     --accent-foreground: 210 40% 98%;
     --success: 142.1 76.2% 36.3%;
     --success-foreground: 355.7 100% 97.3%;
+    --warning: 45 100% 50%; /* Adjust these values as per your color scheme */
+    --warning-foreground: 0 0% 100%; /* Adjust these values as per your color scheme */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
