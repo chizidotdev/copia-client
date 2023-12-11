@@ -1,7 +1,6 @@
 import { Alert, AlertDescription, Button } from '@/components';
 import { useSendVerificationEmail } from '@/modules/user/useVerifyEmail';
 import { useGlobals } from '@/store';
-import { useEffect, useState } from 'react';
 import { GrCircleAlert } from 'react-icons/gr/index.js';
 
 // TODO: Countdown to resend email persisting across page refreshes
@@ -9,12 +8,7 @@ import { GrCircleAlert } from 'react-icons/gr/index.js';
 
 export function VerifyEmailAlert() {
   const { user } = useGlobals();
-  const { mutate, isSuccess } = useSendVerificationEmail();
-  const [emailSent, setEmailSent] = useState(false);
-
-  useEffect(() => {
-    if (isSuccess) setEmailSent(true);
-  }, [isSuccess]);
+  const { mutate, isSuccess, isError } = useSendVerificationEmail();
 
   if (!user || user.emailVerified) return null;
 
@@ -37,15 +31,21 @@ export function VerifyEmailAlert() {
 
   return (
     <div className='m-5 mb-0'>
-      {emailSent ? (
+      {isSuccess && (
         <Alert variant='success'>
           <AlertDescription>
             Verification email sent. Please check your inbox.
           </AlertDescription>
         </Alert>
-      ) : (
-        body
       )}
+      {isError && (
+        <Alert variant='destructive'>
+          <AlertDescription>
+            Something went wrong. Please try again later.
+          </AlertDescription>
+        </Alert>
+      )}
+      {!isSuccess && !isError && body}
     </div>
   );
 }
