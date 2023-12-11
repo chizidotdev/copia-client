@@ -93,6 +93,7 @@ function Providers({ children }: { children: React.ReactNode }) {
             // above 0 to avoid refetching immediately on the client
             staleTime: 60 * 1000,
             refetchOnWindowFocus: false,
+            retry: false,
           },
         },
       })
