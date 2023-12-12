@@ -10,6 +10,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MainNav, Overview, RecentSales, Search, UserNav } from './components';
 import { VerifyEmailAlert } from './components/verifyEmailAlert';
+import CreateProduct from './components/create-product';
 
 export function DashboardPage() {
   return (
@@ -32,7 +33,7 @@ export function DashboardPage() {
           <div className='flex items-center justify-between space-y-2'>
             <h2 className='text-3xl font-bold tracking-tight'>Dashboard</h2>
             <div className='flex items-center space-x-2'>
-              <Button>Download</Button>
+              <CreateProduct />
             </div>
           </div>
           <Tabs defaultValue='overview' className='space-y-4'>
