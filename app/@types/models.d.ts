@@ -53,3 +53,11 @@ interface SoldBy {
   date: string;
   total_sale_price: number;
 }
+
+type CreateProductRequest = {
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  quantityInStock: number;
+};
