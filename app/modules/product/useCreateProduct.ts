@@ -1,9 +1,10 @@
 import { getError } from '@/api';
 import { createProduct } from '@/api/product';
 import { useToast } from '@/components/ui/use-toast';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useCreateProduct = () => {
+  const queryClient = useQueryClient();
   const { toast } = useToast();
 
   return useMutation({
@@ -17,7 +18,13 @@ export const useCreateProduct = () => {
       });
     },
     onSuccess: () => {
-      toast({ description: 'Product added successfully', duration: 3000 });
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+
+      toast({
+        variant: 'success',
+        description: 'Product added successfully',
+        duration: 3000,
+      });
     },
   });
 };
