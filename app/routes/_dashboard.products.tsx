@@ -20,6 +20,7 @@ import {
 
 import type { MetaFunction } from '@remix-run/node';
 import { useProductListTable } from '@/modules/product/useProductListTable';
+import { CreateProduct } from '@/modules/product';
 
 export const meta: MetaFunction = () => {
   return [
@@ -33,8 +34,13 @@ export default function Page() {
 
   return (
     <div className='w-full'>
-      <div className='sm:flex items-center justify-between pb-4'>
-        <h2 className='text-3xl font-bold tracking-tight'>Products</h2>
+      <div className='items-center justify-between pb-4 sm:flex gap-4'>
+        <div className='flex flex-1 items-center justify-between'>
+          <h2 className='text-3xl font-bold tracking-tight'>Products</h2>
+          <div className='flex items-center space-x-2'>
+            <CreateProduct />
+          </div>
+        </div>
         <div className='flex items-center gap-4 py-2 sm:py-0'>
           <Input
             placeholder='Filter products...'
