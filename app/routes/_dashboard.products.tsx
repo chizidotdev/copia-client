@@ -18,9 +18,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import { requireUserSession } from '@/session';
 import type { MetaFunction } from '@remix-run/node';
-import type { LoaderFunctionArgs } from '@remix-run/router';
 import { useProductListTable } from '@/modules/product/useProductListTable';
 
 export const meta: MetaFunction = () => {
@@ -29,10 +27,6 @@ export const meta: MetaFunction = () => {
     { name: 'description', content: 'Product list' },
   ];
 };
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  return await requireUserSession(request);
-}
 
 export default function Page() {
   const { table, columns } = useProductListTable();
