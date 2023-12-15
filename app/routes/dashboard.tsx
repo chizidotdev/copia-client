@@ -2,8 +2,6 @@ import { DashboardPage } from '@/modules/dashboard';
 import { requireUserSession } from '@/session';
 import type { MetaFunction } from '@remix-run/node';
 import type { LoaderFunctionArgs } from '@remix-run/router';
-import { useQuery } from '@tanstack/react-query';
-import { getOrders } from '@/api/order';
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,9 +15,5 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function Page() {
-  const { data } = useQuery({ queryKey: ['orders'], queryFn: getOrders });
-  const orders = data?.data;
-  console.log(orders);
-
   return <DashboardPage />;
 }

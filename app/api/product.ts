@@ -7,3 +7,10 @@ export const createProduct = async ({ data }: { data: FormData }) => {
   });
   return response.data;
 };
+
+export const getProducts = async (): Promise<
+  APIResponse<{ products: Product[] }> | undefined
+> => {
+  const response = await axios.get(`${BASE_URL}/products`);
+  return response.data;
+};

@@ -19,7 +19,7 @@ export function MainNav({ className }: { className?: string }) {
         Customers
       </Link>
       <Link
-        to='/dashboard'
+        to='/products'
         className='hidden text-sm font-medium text-muted-foreground transition-colors hover:text-primary sm:block'
       >
         Products

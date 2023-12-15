@@ -6,6 +6,17 @@ interface User {
   lastName: string;
 }
 
+interface Product {
+  id: string;
+  userId: string;
+  name: string;
+  description: string;
+  price: number;
+  quantityInStock: number;
+  imageURL: string;
+  SKU: string;
+}
+
 interface Order {
   id: string;
   created_at: string;
