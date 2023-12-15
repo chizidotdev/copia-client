@@ -17,7 +17,11 @@ export const useCreateProduct = () => {
       });
     },
     onSuccess: () => {
-      toast({ description: 'Product added successfully', duration: 3000 });
+      toast({
+        variant: 'success',
+        description: 'Product added successfully',
+        duration: 3000,
+      });
     },
   });
 };

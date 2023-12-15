@@ -1,18 +1,18 @@
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
+  DialogTrigger,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useCreateProduct } from '@/modules/product/useCreateProduct';
-import { useState } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
 
 const formFields = [
   { label: 'Name', name: 'name' },
@@ -21,7 +21,7 @@ const formFields = [
   { label: 'Quantity', name: 'quantityInStock' },
 ] as const;
 
-export default function CreateProduct() {
+export function CreateProduct() {
   const [open, setOpen] = useState(false);
   const { mutate } = useCreateProduct();
   const { register, handleSubmit, reset } = useForm<CreateProductRequest>();
@@ -50,6 +50,7 @@ export default function CreateProduct() {
       <DialogTrigger asChild>
         <Button>Add Product</Button>
       </DialogTrigger>
+
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
           <DialogTitle>Add Product</DialogTitle>

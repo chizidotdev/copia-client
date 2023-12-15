@@ -1,5 +1,4 @@
 import { DemoBanner } from '@/components/demo-banner';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -10,7 +9,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MainNav, Overview, RecentSales, Search, UserNav } from './components';
 import { VerifyEmailAlert } from './components/verifyEmailAlert';
-import CreateProduct from './components/create-product';
+import { CreateProduct } from '@/modules/product';
 
 export function DashboardPage() {
   return (
@@ -162,7 +161,7 @@ export function DashboardPage() {
                     <Overview />
                   </CardContent>
                 </Card>
-                <Card className='col-span-3'>
+                <Card className='col-span-4'>
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>
                     <CardDescription>
