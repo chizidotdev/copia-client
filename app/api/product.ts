@@ -14,3 +14,23 @@ export const getProducts = async (): Promise<
   const response = await axios.get(`${BASE_URL}/products`);
   return response.data;
 };
+
+export const getProduct = async (
+  id: string
+): Promise<APIResponse<Product> | undefined> => {
+  const response = await axios.get(`${BASE_URL}/products/${id}`);
+  return response.data;
+};
+
+export const editProduct = async ({
+  data,
+  id,
+}: {
+  data: FormData;
+  id: string;
+}): Promise<APIResponse<{ product: Product }> | undefined> => {
+  const response = await axios.put(`${BASE_URL}/products/${id}`, data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return response.data;
+};
