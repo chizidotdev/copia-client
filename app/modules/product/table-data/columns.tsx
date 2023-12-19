@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { EditProduct } from '../components/edit-product';
 
 export const columns: ColumnDef<Product>[] = [
   {
@@ -86,10 +87,10 @@ export const columns: ColumnDef<Product>[] = [
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue('price'));
 
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat('en-US', {
+      // Format the amount as a naira amount
+      const formatted = new Intl.NumberFormat('en-NG', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'NGN',
       }).format(amount);
 
       return <div className='text-right font-medium'>{formatted}</div>;
@@ -99,7 +100,7 @@ export const columns: ColumnDef<Product>[] = [
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const item = row.original;
 
       return (
         <DropdownMenu>
@@ -114,12 +115,12 @@ export const columns: ColumnDef<Product>[] = [
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.SKU)}
+              onClick={() => navigator.clipboard.writeText(item.SKU)}
             >
               Copy Product Link
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <EditProduct item={item} />
             <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

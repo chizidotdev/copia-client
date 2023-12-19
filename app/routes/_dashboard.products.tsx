@@ -21,6 +21,7 @@ import {
 import type { MetaFunction } from '@remix-run/node';
 import { useProductListTable } from '@/modules/product/useProductListTable';
 import { CreateProduct } from '@/modules/product';
+import { Outlet } from '@remix-run/react';
 
 export const meta: MetaFunction = () => {
   return [
@@ -34,7 +35,7 @@ export default function Page() {
 
   return (
     <div className='w-full'>
-      <div className='items-center justify-between pb-4 sm:flex gap-4'>
+      <div className='items-center justify-between gap-4 pb-4 sm:flex'>
         <div className='flex flex-1 items-center justify-between'>
           <h2 className='text-3xl font-bold tracking-tight'>Products</h2>
           <div className='flex items-center space-x-2'>
@@ -152,6 +153,8 @@ export default function Page() {
           </Button>
         </div>
       </div>
+
+      <Outlet />
     </div>
   );
 }
