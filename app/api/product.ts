@@ -34,3 +34,14 @@ export const editProduct = async ({
   });
   return response.data;
 };
+
+export const updateQuantity = async ({
+  data,
+  id,
+}: {
+  data: { newQuantity: number };
+  id: string;
+}): Promise<APIResponse<{ product: Product }> | undefined> => {
+  const response = await axios.patch(`${BASE_URL}/products/${id}/quantity`, data);
+  return response.data;
+};

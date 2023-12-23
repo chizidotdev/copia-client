@@ -16,7 +16,7 @@ export function EditProduct({ item }: { item: Product }) {
   const navigate = useNavigate();
 
   return (
-    <DropdownMenuItem onClick={() => navigate(`/products/${item.id}`)}>
+    <DropdownMenuItem onClick={() => navigate(`/products/${item.id}/edit`)}>
       Edit
     </DropdownMenuItem>
   );
