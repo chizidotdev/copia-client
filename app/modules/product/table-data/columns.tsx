@@ -1,18 +1,8 @@
 import { RxCaretSort } from 'react-icons/rx/index.js';
-import { GoKebabHorizontal } from 'react-icons/go/index.js';
 import type { ColumnDef } from '@tanstack/react-table';
 
-import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { EditProduct } from '../components/edit-product';
+import { ActionOptions } from '@/modules/product/components/action-options';
 
 export const columns: ColumnDef<Product>[] = [
   {
@@ -72,7 +62,7 @@ export const columns: ColumnDef<Product>[] = [
           className='flex cursor-pointer items-center justify-end'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Quantity
+          Qty
           <RxCaretSort className='ml-2 h-4 w-4' />
         </div>
       );
@@ -99,32 +89,6 @@ export const columns: ColumnDef<Product>[] = [
   {
     id: 'actions',
     enableHiding: false,
-    cell: ({ row }) => {
-      const item = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <div className='flex items-center justify-center'>
-              <Button variant='ghost' className='h-8 w-8 p-0'>
-                <span className='sr-only'>Open menu</span>
-                <GoKebabHorizontal className='h-4 w-4' />
-              </Button>
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(item.SKU)}
-            >
-              Copy Product Link
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <EditProduct item={item} />
-            <DropdownMenuItem>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <ActionOptions row={row} />,
   },
 ];
