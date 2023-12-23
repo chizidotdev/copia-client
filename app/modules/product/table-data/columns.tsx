@@ -62,7 +62,7 @@ export const columns: ColumnDef<Product>[] = [
           className='flex cursor-pointer items-center justify-end'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Quantity
+          Qty
           <RxCaretSort className='ml-2 h-4 w-4' />
         </div>
       );
